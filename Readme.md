@@ -1,1 +1,1 @@
-This Reopository is assignment of BOB repository
+Assignment of BOB
