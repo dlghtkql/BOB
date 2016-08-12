@@ -2,11 +2,12 @@
 
 mal_site.txt의 유해사이트 목록을 불러와 http 패킷의 url과 비교하여 사용자가 유해한 사이트에 접속하였는지 탐지.
 
+mal_site.py와 arp_attack.py를 같이 실행시킨다.
 
 실행방법
 ----
     $ sudo python mal_site.py 
-    $ sudo python open_url.py
+    $ sudo python arp_attack.py
 
 
 mal_site.py
@@ -25,9 +26,6 @@ mal_site.py를 실행하고 사이트에 접속한 후의 url과 접속할때의
 접속후의 url -> http://www.vr832.com
 
 
-open_url.py
+arp_attack.py
 -----------
-mal_site.txt의 유해사이트를 불러와 자동으로 브라우저에서 open
-
-*주의:수십개의 유해사이트를 한번에 open하다보니(sleep하였음에도) 브라우저가 뻗거나 컴퓨터가 뻗는 경우가 발생하니 10개씩 끊어서 open하는 것을 권장
-
+arp 패킷을 주기적으로 보내서 감염시키는 스크립트 => mal_site.py에 있는 감염 기능을 빼고 새로 만들었다 이유는 mal_site.py가 너무 느려서 따로 구현하였다.
