@@ -45,7 +45,7 @@ def make_redirect_packet(pkt):
     rpacket = pkt.copy()
     var_packet = pkt.copy()
 
-    redirect_site = 'HTTP/1.1 302 Redirect\r\n'
+    redirect_site = 'HTTP/1.1 302 Found\r\n'
     redirect_site += 'Location: http://www.gilgil.net\r\n'
     redirect_site += '\r\n'
 
