@@ -36,6 +36,7 @@ def make_backword_packet(pkt):
 
     bpacket[TCP].dport = var_packet[TCP].sport
     bpacket[TCP].sport = var_packet[TCP].dport
+    #bpacket = Ether(src=var_packet[Ether].dst,dst=var_packet[Ether].src)/IP(src=var_packet[IP].dst,dst=var_packet[IP].src)/TCP(dport=var_packet[TCP].sport,sport=var_packet[TCP].dport,flags='FA',ack=ack_num)/'blocked\r\n'
 
     return bpacket
 
